@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Episodes — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section style="padding-bottom: 24px;">
+  <div class="wrap">
+    <h1 style="font-size: 2.2rem;">Episodes</h1>
+    <p class="lede">{{ videos|length }} episode{{ '' if videos|length == 1 else 's' }}{% if active_category %} in {{ active_category }}{% endif %}{% if search %} matching &ldquo;{{ search }}&rdquo;{% endif %}.</p>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <div class="wrap">
+    <div class="filter-bar">
+      <div class="filter-chips">
+        <a class="chip {{ 'active' if not active_category }}" href="{{ url_for('videos') }}">All</a>
+        {% for c in categories %}
+        <a class="chip {{ 'active' if active_category == c['category'] }}"
+           href="{{ url_for('videos', category=c['category']) }}">{{ c['category'] }}</a>
+        {% endfor %}
+      </div>
+      <form class="search-box" method="get" action="{{ url_for('videos') }}">
+        {% if active_category %}<input type="hidden" name="category" value="{{ active_category }}">{% endif %}
+        <input type="text" name="q" value="{{ search }}" placeholder="Search episodes…">
+        <button class="btn btn-ghost" type="submit">Search</button>
+      </form>
+    </div>
+
+    {% if videos %}
+    <div class="video-grid">
+      {% for v in videos %}
+      <a class="video-card" href="{{ url_for('video_detail', video_id=v['id']) }}">
+        <div class="thumb">
+          <img src="{{ v['thumbnail'] }}" alt="{{ v['title'] }}" loading="lazy">
+          <span class="duration">{{ v['duration'] }}</span>
+        </div>
+        <div class="category">{{ v['category'] }}</div>
+        <h3>{{ v['title'] }}</h3>
+        <div class="meta">{{ v['location'] }} &middot; {{ v['published_on'] }} &middot; {{ "{:,}".format(v['views']) }} views</div>
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state">
+      <h3>No episodes match yet</h3>
+      <p>Try a different series, or <a href="{{ url_for('videos') }}">clear the filters</a>.</p>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

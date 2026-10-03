@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Not found — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="wrap">
+    <h1 style="font-size: 2.4rem;">This trail doesn't exist.</h1>
+    <p class="lede">Whatever you were looking for isn't at this address.</p>
+    <a class="btn btn-primary" href="{{ url_for('home') }}">Back to the homepage</a>
+  </div>
+</section>
+{% endblock %}

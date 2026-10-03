@@ -1,0 +1,94 @@
+{% extends "base.html" %}
+{% block title %}{{ site_name }} — Vlogs from the far edges of the map{% endblock %}
+
+{% block content %}
+
+<section class="hero" style="padding-bottom: 60px;">
+  <div class="wrap">
+    <div>
+      <div class="hero-eyebrow">Episode {{ stats.n }} just went up</div>
+      <h1>Slow travel, filmed honestly, one trail at a time.</h1>
+      <p>A weekly-ish vlog about hiking, van life, and the food and people found
+        along the way — no drone-shot cliches, just what actually happened that day.</p>
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="{{ url_for('videos') }}">Watch the latest episodes</a>
+        <a class="btn btn-ghost on-dark" href="{{ url_for('journal') }}">Read the journal</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <span class="num">{{ stats.n }}</span>
+        <span class="label">Episodes published</span>
+      </div>
+      <div>
+        <span class="num">{{ "{:,}".format(stats.total_views) }}</span>
+        <span class="label">Total views</span>
+      </div>
+      <div>
+        <span class="num">{{ categories|length }}</span>
+        <span class="label">Recurring series</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>Latest episodes</h2>
+      <a href="{{ url_for('videos') }}">View all &rarr;</a>
+    </div>
+    <div class="video-grid">
+      {% for v in featured %}
+      <a class="video-card" href="{{ url_for('video_detail', video_id=v['id']) }}">
+        <div class="thumb">
+          <img src="{{ v['thumbnail'] }}" alt="{{ v['title'] }}" loading="lazy">
+          <span class="duration">{{ v['duration'] }}</span>
+        </div>
+        <div class="category">{{ v['category'] }}</div>
+        <h3>{{ v['title'] }}</h3>
+        <div class="meta">{{ v['location'] }} &middot; {{ v['published_on'] }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section style="background: var(--parchment); padding: 64px 0;">
+  <div class="wrap about-grid">
+    <div>
+      <h2>Series, not just episodes</h2>
+      <p class="lede">Every trip gets filed under a series, so if a place or a
+        way of moving catches your interest, there's more of it to find.</p>
+    </div>
+    <div class="stat-list" style="margin-top: 0;">
+      {% for c in categories %}
+      <div class="row">
+        <a href="{{ url_for('videos', category=c['category']) }}">{{ c['category'] }}</a>
+        <strong>{{ c['n'] }}</strong>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if latest_post %}
+<section>
+  <div class="wrap">
+    <div class="section-head">
+      <h2>From the journal</h2>
+      <a href="{{ url_for('journal') }}">All posts &rarr;</a>
+    </div>
+    <div class="post-row" style="border-top: none; padding-top: 0;">
+      <div class="date">{{ latest_post['published_on'] }}</div>
+      <div>
+        <h3><a href="{{ url_for('journal_post', post_id=latest_post['id']) }}">{{ latest_post['title'] }}</a></h3>
+        <p>{{ latest_post['excerpt'] }}</p>
+        <a class="btn btn-ghost" href="{{ url_for('journal_post', post_id=latest_post['id']) }}">Read the post</a>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+
+{% endblock %}

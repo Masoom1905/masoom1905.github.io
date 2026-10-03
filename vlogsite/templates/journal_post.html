@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ post['title'] }} — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section style="padding-bottom: 24px;">
+  <div class="wrap" style="max-width: 720px;">
+    <div class="tag-row"><span>{{ post['published_on'] }}</span></div>
+    <h1 style="font-size: 2.3rem; max-width: 18ch;">{{ post['title'] }}</h1>
+    <div class="post-body">
+      {% for para in post['body'].split('\n\n') %}
+      <p>{{ para }}</p>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% if others %}
+<section style="background: var(--parchment);">
+  <div class="wrap">
+    <div class="section-head"><h2>More from the journal</h2></div>
+    <div class="video-grid" style="grid-template-columns: repeat(2, 1fr); max-width: 720px;">
+      {% for o in others %}
+      <a class="video-card" href="{{ url_for('journal_post', post_id=o['id']) }}">
+        <h3>{{ o['title'] }}</h3>
+        <p>{{ o['excerpt'] }}</p>
+        <div class="meta">{{ o['published_on'] }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+{% endblock %}

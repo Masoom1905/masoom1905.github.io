@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{{ site_name }}{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="{{ url_for('home') }}">
+        Northbound <span>Journal</span>
+      </a>
+      <nav class="main-nav">
+        <a href="{{ url_for('home') }}" class="{{ 'active' if request.endpoint == 'home' }}">Home</a>
+        <a href="{{ url_for('videos') }}" class="{{ 'active' if request.endpoint in ['videos','video_detail'] }}">Episodes ({{ nav_video_count }})</a>
+        <a href="{{ url_for('journal') }}" class="{{ 'active' if request.endpoint in ['journal','journal_post'] }}">Journal</a>
+        <a href="{{ url_for('about') }}" class="{{ 'active' if request.endpoint == 'about' }}">About</a>
+        <a href="{{ url_for('contact') }}" class="{{ 'active' if request.endpoint == 'contact' }}">Contact</a>
+        <a href="{{ url_for('upload') }}" class="{{ 'active' if request.endpoint == 'upload' }}">Publish</a>
+      </nav>
+    </div>
+  </header>
+
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+      <div class="wrap" style="padding-top: 24px;">
+        {% for category, message in messages %}
+          <div class="flash {{ category }}">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <section class="newsletter">
+    <div class="wrap">
+      <div>
+        <h2>Get the next episode first</h2>
+        <p>One email when something new is published. No detours.</p>
+      </div>
+      <form action="{{ url_for('subscribe') }}" method="post">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; {{ current_year }} Northbound Journal.</span>
+      <span>Built with Flask &amp; SQLite — a small, honest stack.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block title %}About — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section>
+  <div class="wrap about-grid">
+    <div>
+      <h1 style="font-size: 2.2rem;">Filming the places that take effort to reach.</h1>
+      <p class="lede">Northbound Journal started as a way to remember trips,
+        not promote them. It's grown into a weekly-ish record of hiking, van life,
+        diving, and slow travel — filmed by one person with one camera, most of
+        the time.</p>
+      <p>There's no crew. Most episodes are shot handheld, edited on the road,
+        and published a few weeks after they happen, once there's a real desk
+        to sit at and finish them properly. The goal has never been to make
+        travel look easy — some of the best episodes are the ones where it wasn't.</p>
+      <p>If you've got a route worth filming or a question about the gear,
+        the <a href="{{ url_for('contact') }}" style="color: var(--rust); font-weight: 600;">contact page</a> reaches a real inbox.</p>
+    </div>
+    <div>
+      <h2 style="font-size: 1.2rem;">By the numbers</h2>
+      <div class="stat-list">
+        <div class="row"><span>Episodes published</span><strong>{{ stats['video_count'] }}</strong></div>
+        <div class="row"><span>Total views across all episodes</span><strong>{{ "{:,}".format(stats['total_views']) }}</strong></div>
+        <div class="row"><span>First episode published</span><strong>{{ stats['first_published'] }}</strong></div>
+        <div class="row"><span>Places filmed</span><strong>{{ countries|length }}</strong></div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

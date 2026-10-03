@@ -1,0 +1,82 @@
+{% extends "base.html" %}
+{% block title %}{{ video['title'] }} — {{ site_name }}{% endblock %}
+
+{% block content %}
+<section style="padding-bottom: 32px;">
+  <div class="wrap">
+
+    <div class="player-frame">
+      <iframe src="https://www.youtube.com/embed/{{ video['youtube_id'] }}"
+              title="{{ video['title'] }}"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen></iframe>
+    </div>
+
+    <div class="detail-head">
+      <div>
+        <div class="category">{{ video['category'] }}</div>
+        <h1 style="font-size: 2rem; max-width: 20ch;">{{ video['title'] }}</h1>
+      </div>
+      <a class="btn btn-ghost" href="{{ url_for('videos', category=video['category']) }}">More {{ video['category'] }} &rarr;</a>
+    </div>
+
+    <div class="tag-row">
+      <span>{{ video['location'] }}</span>
+      <span class="dot">{{ video['published_on'] }}</span>
+      <span class="dot">{{ "{:,}".format(video['views']) }} views</span>
+      <span class="dot">{{ video['duration'] }}</span>
+    </div>
+
+    <p class="lede">{{ video['description'] }}</p>
+  </div>
+</section>
+
+{% if more %}
+<section style="background: var(--parchment); padding: 56px 0;">
+  <div class="wrap">
+    <div class="section-head">
+      <h2>More from {{ video['category'] }}</h2>
+    </div>
+    <div class="video-grid">
+      {% for v in more %}
+      <a class="video-card" href="{{ url_for('video_detail', video_id=v['id']) }}">
+        <div class="thumb">
+          <img src="{{ v['thumbnail'] }}" alt="{{ v['title'] }}" loading="lazy">
+          <span class="duration">{{ v['duration'] }}</span>
+        </div>
+        <h3>{{ v['title'] }}</h3>
+        <div class="meta">{{ v['location'] }} &middot; {{ v['published_on'] }}</div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endif %}
+
+<section id="comments">
+  <div class="wrap" style="max-width: 760px;">
+    <h2 style="font-size: 1.4rem;">{{ comments|length }} comment{{ '' if comments|length == 1 else 's' }}</h2>
+
+    <form method="post" action="{{ url_for('add_comment', video_id=video['id']) }}" style="margin: 24px 0 8px;">
+      <div class="field">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" placeholder="Your name" required>
+      </div>
+      <div class="field">
+        <label for="body">Comment</label>
+        <textarea id="body" name="body" placeholder="What stood out to you?" required></textarea>
+      </div>
+      <button class="btn btn-primary" type="submit">Post comment</button>
+    </form>
+
+    {% for c in comments %}
+    <div class="comment">
+      <div class="who">{{ c['name'] }} <span class="when">&middot; {{ c['created_at'] }}</span></div>
+      <p>{{ c['body'] }}</p>
+    </div>
+    {% else %}
+    <p style="border-top: 1px solid var(--line); padding-top: 18px;">Be the first to leave a comment.</p>
+    {% endfor %}
+  </div>
+</section>
+{% endblock %}
