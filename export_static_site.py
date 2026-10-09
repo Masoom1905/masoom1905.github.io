@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import os
 import re
 import shutil
 import sqlite3
@@ -15,7 +16,14 @@ from vlogsite.app import DB_PATH, app
 
 REPO_ROOT = Path(__file__).resolve().parent
 SITE_DIR = REPO_ROOT / "site"
-CSS_SRC = REPO_ROOT / "vlogsite" / "static" / "css" / "style.css"
+STATIC_SRC = REPO_ROOT / "vlogsite" / "static"
+
+# Subpath the site is served from. GitHub project sites live at
+# https://<user>.github.io/<repo>/, so links need a "/<repo>" prefix.
+# Leave empty for a user site (<user>.github.io repo) or local preview.
+BASE_PATH = os.environ.get("SITE_BASE_PATH", "").strip().rstrip("/")
+if BASE_PATH and not BASE_PATH.startswith("/"):
+    BASE_PATH = "/" + BASE_PATH
 
 VIDEO_SLUGS: dict[int, str] = {}
 POST_SLUGS: dict[int, str] = {}
@@ -58,6 +66,10 @@ def build_slug_maps() -> None:
 
 
 def static_url_for(endpoint: str, **values):
+    return BASE_PATH + _static_path(endpoint, **values)
+
+
+def _static_path(endpoint: str, **values):
     if endpoint == "static":
         filename = values.get("filename", "")
         return f"/static/{filename}"
@@ -96,6 +108,7 @@ def static_url_for(endpoint: str, **values):
 
 def render_static(template_name: str, request_path: str, **context):
     app.jinja_env.globals["url_for"] = static_url_for
+    app.jinja_env.globals["static_export"] = True
     with app.test_request_context(request_path):
         return render_template(template_name, **context)
 
@@ -132,9 +145,9 @@ def generate_site() -> None:
         shutil.rmtree(SITE_DIR)
     SITE_DIR.mkdir(parents=True, exist_ok=True)
 
-    static_dir = SITE_DIR / "static" / "css"
-    static_dir.mkdir(parents=True, exist_ok=True)
-    shutil.copy2(CSS_SRC, static_dir / "style.css")
+    # Copy all static assets (css, js, img) and tell GitHub Pages not to run Jekyll
+    shutil.copytree(STATIC_SRC, SITE_DIR / "static")
+    (SITE_DIR / ".nojekyll").write_text("", encoding="utf-8")
 
     with sqlite3.connect(DB_PATH) as db:
         db.row_factory = sqlite3.Row
@@ -282,4 +295,4 @@ def get_other_posts(current_id: int):
 
 if __name__ == "__main__":
     generate_site()
-    print(f"Static site generated in {SITE_DIR}")
+    print(f"Static site generated in {SITE_DIR} (base path: {BASE_PATH or '/'})")

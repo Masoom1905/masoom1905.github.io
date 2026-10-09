@@ -16,7 +16,7 @@
       </div>
     </div>
     <div>
-      <form method="post" action="{{ url_for('contact') }}">
+      <form method="post" action="{{ url_for('contact') }}"{% if static_export %} data-static-form="Contact"{% endif %}>
         <div class="field">
           <label for="name">Name</label>
           <input type="text" id="name" name="name" required>

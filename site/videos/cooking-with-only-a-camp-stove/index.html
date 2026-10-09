@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Cooking With Only a Camp Stove — Northbound Journal</title>
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/northbound-journal-flask-vlog/static/css/style.css">
+  <script src="/northbound-journal-flask-vlog/static/js/site.js" defer></script>
 </head>
 <body>
 
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="/">
+      <a class="brand" href="/northbound-journal-flask-vlog/">
         Northbound <span>Journal</span>
       </a>
       <nav class="main-nav">
-        <a href="/" class="">Home</a>
-        <a href="/videos/" class="active">Episodes (6)</a>
-        <a href="/journal/" class="">Journal</a>
-        <a href="/about.html" class="">About</a>
-        <a href="/contact.html" class="">Contact</a>
-        <a href="/upload.html" class="">Publish</a>
+        <a href="/northbound-journal-flask-vlog/" class="">Home</a>
+        <a href="/northbound-journal-flask-vlog/videos/" class="active">Episodes (6)</a>
+        <a href="/northbound-journal-flask-vlog/journal/" class="">Journal</a>
+        <a href="/northbound-journal-flask-vlog/about.html" class="">About</a>
+        <a href="/northbound-journal-flask-vlog/contact.html" class="">Contact</a>
+        <a href="/northbound-journal-flask-vlog/upload.html" class="">Publish</a>
       </nav>
     </div>
   </header>
@@ -45,7 +46,7 @@
         <div class="category">Food</div>
         <h1 style="font-size: 2rem; max-width: 20ch;">Cooking With Only a Camp Stove</h1>
       </div>
-      <a class="btn btn-ghost" href="/videos/?category=Food">More Food &rarr;</a>
+      <a class="btn btn-ghost" href="/northbound-journal-flask-vlog/videos/?category=Food">More Food &rarr;</a>
     </div>
 
     <div class="tag-row">
@@ -65,7 +66,7 @@
   <div class="wrap" style="max-width: 760px;">
     <h2 style="font-size: 1.4rem;">0 comments</h2>
 
-    <form method="post" action="/" style="margin: 24px 0 8px;">
+    <form method="post" action="/northbound-journal-flask-vlog/" style="margin: 24px 0 8px;" data-static-form="Comment">
       <div class="field">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
@@ -91,7 +92,7 @@
         <h2>Get the next episode first</h2>
         <p>One email when something new is published. No detours.</p>
       </div>
-      <form action="/" method="post">
+      <form action="/northbound-journal-flask-vlog/" method="post" data-static-form="Newsletter">
         <input type="email" name="email" placeholder="you@example.com" required>
         <button class="btn btn-primary" type="submit">Subscribe</button>
       </form>

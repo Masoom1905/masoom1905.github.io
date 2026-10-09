@@ -4,22 +4,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About — Northbound Journal</title>
-  <link rel="stylesheet" href="/static/css/style.css">
+  <link rel="stylesheet" href="/northbound-journal-flask-vlog/static/css/style.css">
+  <script src="/northbound-journal-flask-vlog/static/js/site.js" defer></script>
 </head>
 <body>
 
   <header class="site-header">
     <div class="wrap">
-      <a class="brand" href="/">
+      <a class="brand" href="/northbound-journal-flask-vlog/">
         Northbound <span>Journal</span>
       </a>
       <nav class="main-nav">
-        <a href="/" class="">Home</a>
-        <a href="/videos/" class="">Episodes (6)</a>
-        <a href="/journal/" class="">Journal</a>
-        <a href="/about.html" class="active">About</a>
-        <a href="/contact.html" class="">Contact</a>
-        <a href="/upload.html" class="">Publish</a>
+        <a href="/northbound-journal-flask-vlog/" class="">Home</a>
+        <a href="/northbound-journal-flask-vlog/videos/" class="">Episodes (6)</a>
+        <a href="/northbound-journal-flask-vlog/journal/" class="">Journal</a>
+        <a href="/northbound-journal-flask-vlog/about.html" class="active">About</a>
+        <a href="/northbound-journal-flask-vlog/contact.html" class="">Contact</a>
+        <a href="/northbound-journal-flask-vlog/upload.html" class="">Publish</a>
       </nav>
     </div>
   </header>
@@ -43,7 +44,7 @@
         to sit at and finish them properly. The goal has never been to make
         travel look easy — some of the best episodes are the ones where it wasn't.</p>
       <p>If you've got a route worth filming or a question about the gear,
-        the <a href="/contact.html" style="color: var(--rust); font-weight: 600;">contact page</a> reaches a real inbox.</p>
+        the <a href="/northbound-journal-flask-vlog/contact.html" style="color: var(--rust); font-weight: 600;">contact page</a> reaches a real inbox.</p>
     </div>
     <div>
       <h2 style="font-size: 1.2rem;">By the numbers</h2>
@@ -65,7 +66,7 @@
         <h2>Get the next episode first</h2>
         <p>One email when something new is published. No detours.</p>
       </div>
-      <form action="/" method="post">
+      <form action="/northbound-journal-flask-vlog/" method="post" data-static-form="Newsletter">
         <input type="email" name="email" placeholder="you@example.com" required>
         <button class="btn btn-primary" type="submit">Subscribe</button>
       </form>

@@ -57,7 +57,7 @@
   <div class="wrap" style="max-width: 760px;">
     <h2 style="font-size: 1.4rem;">{{ comments|length }} comment{{ '' if comments|length == 1 else 's' }}</h2>
 
-    <form method="post" action="{{ url_for('add_comment', video_id=video['id']) }}" style="margin: 24px 0 8px;">
+    <form method="post" action="{{ url_for('add_comment', video_id=video['id']) }}" style="margin: 24px 0 8px;"{% if static_export %} data-static-form="Comment"{% endif %}>
       <div class="field">
         <label for="name">Name</label>
         <input type="text" id="name" name="name" placeholder="Your name" required>
