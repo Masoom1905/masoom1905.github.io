@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Publish — Northbound Journal</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">
+        Northbound <span>Journal</span>
+      </a>
+      <nav class="main-nav">
+        <a href="/" class="">Home</a>
+        <a href="/videos/" class="">Episodes (6)</a>
+        <a href="/journal/" class="">Journal</a>
+        <a href="/about.html" class="">About</a>
+        <a href="/contact.html" class="">Contact</a>
+        <a href="/upload.html" class="active">Publish</a>
+      </nav>
+    </div>
+  </header>
+
+  
+    
+  
+
+  <main>
+    
+<section>
+  <div class="wrap" style="max-width: 640px;">
+    <h1 style="font-size: 2.2rem;">Publish a new episode</h1>
+    <p class="lede">Fills straight into the episode library — it'll show up on
+      the Episodes page and the homepage immediately.</p>
+
+    <form method="post" action="/upload.html" style="margin-top: 28px;">
+      <div class="field">
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" placeholder="Where the trail almost won" required>
+      </div>
+
+      <div class="field">
+        <label for="category">Series</label>
+        <input type="text" id="category" name="category" placeholder="Hiking, Van Life, Food…" required>
+      </div>
+
+      <div class="field">
+        <label for="location">Location</label>
+        <input type="text" id="location" name="location" placeholder="Torres del Paine, Chile">
+      </div>
+
+      <div class="field">
+        <label for="duration">Duration</label>
+        <input type="text" id="duration" name="duration" placeholder="14:20">
+      </div>
+
+      <div class="field">
+        <label for="youtube_id">YouTube video ID</label>
+        <input type="text" id="youtube_id" name="youtube_id" placeholder="dQw4w9WgXcQ">
+      </div>
+
+      <div class="field">
+        <label for="thumbnail">Thumbnail URL</label>
+        <input type="text" id="thumbnail" name="thumbnail" placeholder="https://…">
+      </div>
+
+      <div class="field">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="What happened, where, and why it's worth eleven minutes." required></textarea>
+      </div>
+
+      <button class="btn btn-primary" type="submit">Publish episode</button>
+    </form>
+  </div>
+</section>
+
+  </main>
+
+  <section class="newsletter">
+    <div class="wrap">
+      <div>
+        <h2>Get the next episode first</h2>
+        <p>One email when something new is published. No detours.</p>
+      </div>
+      <form action="/" method="post">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Northbound Journal.</span>
+      <span>Built with Flask &amp; SQLite — a small, honest stack.</span>
+    </div>
+  </footer>
+
+</body>
+</html>

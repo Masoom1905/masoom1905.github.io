@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact — Northbound Journal</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="wrap">
+      <a class="brand" href="/">
+        Northbound <span>Journal</span>
+      </a>
+      <nav class="main-nav">
+        <a href="/" class="">Home</a>
+        <a href="/videos/" class="">Episodes (6)</a>
+        <a href="/journal/" class="">Journal</a>
+        <a href="/about.html" class="">About</a>
+        <a href="/contact.html" class="active">Contact</a>
+        <a href="/upload.html" class="">Publish</a>
+      </nav>
+    </div>
+  </header>
+
+  
+    
+  
+
+  <main>
+    
+<section>
+  <div class="wrap contact-grid">
+    <div>
+      <h1 style="font-size: 2.2rem;">Get in touch</h1>
+      <p class="lede">Route tips, gear questions, collaboration ideas, or just
+        which episode you watched twice — all of it lands in the same inbox
+        and gets read.</p>
+      <div class="stat-list">
+        <div class="row"><span>Usual reply time</span><strong>2–4 days</strong></div>
+        <div class="row"><span>Best for</span><strong>Route &amp; gear Qs</strong></div>
+        <div class="row"><span>Collabs</span><strong>Open to pitches</strong></div>
+      </div>
+    </div>
+    <div>
+      <form method="post" action="/contact.html">
+        <div class="field">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="field">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" placeholder="What's this about?">
+        </div>
+        <div class="field">
+          <label for="body">Message</label>
+          <textarea id="body" name="body" required></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Send message</button>
+      </form>
+    </div>
+  </div>
+</section>
+
+  </main>
+
+  <section class="newsletter">
+    <div class="wrap">
+      <div>
+        <h2>Get the next episode first</h2>
+        <p>One email when something new is published. No detours.</p>
+      </div>
+      <form action="/" method="post">
+        <input type="email" name="email" placeholder="you@example.com" required>
+        <button class="btn btn-primary" type="submit">Subscribe</button>
+      </form>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <span>&copy; 2026 Northbound Journal.</span>
+      <span>Built with Flask &amp; SQLite — a small, honest stack.</span>
+    </div>
+  </footer>
+
+</body>
+</html>
